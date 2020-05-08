@@ -1,1 +1,0 @@
-D:\Projects\UWP\LaudibleLayout\LaudibleLayout\LaudibleLayout.csproj;x86
