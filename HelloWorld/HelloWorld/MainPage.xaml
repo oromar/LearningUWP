@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="HelloWorld.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:HelloWorld"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Button
+            Name="ClickMeButton"
+            Width="238"
+            Height="85"
+            Margin="10,10,0,0"
+            VerticalAlignment="Top"
+            Background="Red"
+            Click="ClickMeButton_Click"
+            ClickMode="Release"
+            Content="Click Me!" />
+
+        <TextBlock
+            Name="Result"
+            VerticalAlignment="Center"
+            FontSize="120px"
+            HorizontalTextAlignment="Center"
+            IsColorFontEnabled="True" />
+    </Grid>
+</Page>

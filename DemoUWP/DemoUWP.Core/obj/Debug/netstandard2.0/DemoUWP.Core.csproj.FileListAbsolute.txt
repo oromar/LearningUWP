@@ -1,0 +1,8 @@
+D:\oldm\UWP\DemoUWP.Core\bin\Debug\netstandard2.0\DemoUWP.Core.deps.json
+D:\oldm\UWP\DemoUWP.Core\bin\Debug\netstandard2.0\DemoUWP.Core.dll
+D:\oldm\UWP\DemoUWP.Core\bin\Debug\netstandard2.0\DemoUWP.Core.pdb
+D:\oldm\UWP\DemoUWP.Core\obj\Debug\netstandard2.0\DemoUWP.Core.csprojAssemblyReference.cache
+D:\oldm\UWP\DemoUWP.Core\obj\Debug\netstandard2.0\DemoUWP.Core.AssemblyInfoInputs.cache
+D:\oldm\UWP\DemoUWP.Core\obj\Debug\netstandard2.0\DemoUWP.Core.AssemblyInfo.cs
+D:\oldm\UWP\DemoUWP.Core\obj\Debug\netstandard2.0\DemoUWP.Core.dll
+D:\oldm\UWP\DemoUWP.Core\obj\Debug\netstandard2.0\DemoUWP.Core.pdb
