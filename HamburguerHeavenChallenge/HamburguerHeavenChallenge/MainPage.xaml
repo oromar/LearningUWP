@@ -7,8 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <RelativePanel
+            Grid.Row="0"
             Width="Auto"
             Height="50"
             VerticalAlignment="Top">
@@ -51,57 +56,48 @@
                 FontSize="36"
                 RelativePanel.AlignRightWithPanel="True" />
         </RelativePanel>
-        <RelativePanel
-            Width="Auto"
-            Height="Auto"
-            VerticalAlignment="Top">
-            <SplitView
-                Name="MenuSplitView"
-                Margin="0,0,0,0"
-                CompactPaneLength="56"
-                DisplayMode="CompactOverlay"
-                IsPaneOpen="False"
-                OpenPaneLength="210"
-                RelativePanel.AlignBottomWithPanel="True"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignTopWithPanel="True">
-                <SplitView.Pane>
-                    <ListBox
-                        Name="MenuListBox"
-                        Margin="0,0,0,0"
-                        SelectionChanged="MenuListBox_SelectionChanged"
-                        SelectionMode="Single">
-                        <ListBoxItem Name="FinancialListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    FontFamily="Segoe MDL2 Assets"
-                                    FontSize="36"
-                                    Text="&#xE80F;" />
-                                <TextBlock
-                                    Margin="10,0,0,0"
-                                    FontSize="36"
-                                    Text="Financial" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="FoodListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    FontFamily="Segoe MDL2 Assets"
-                                    FontSize="36"
-                                    Text="&#xE1CE;" />
-                                <TextBlock
-                                    Margin="10,0,0,0"
-                                    FontSize="36"
-                                    Text="Food" />
-                            </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
-                </SplitView.Pane>
-                <SplitView.Content>
-                    <Frame Name="MyFrame" />
-                </SplitView.Content>
-            </SplitView>
-        </RelativePanel>
-    </StackPanel>
+        <SplitView
+            Name="MenuSplitView"
+            Grid.Row="1"
+            CompactPaneLength="56"
+            DisplayMode="CompactOverlay"
+            IsPaneOpen="False"
+            OpenPaneLength="210">
+            <SplitView.Pane>
+                <ListBox
+                    Name="MenuListBox"
+                    Margin="0,0,0,0"
+                    SelectionChanged="MenuListBox_SelectionChanged"
+                    SelectionMode="Single">
+                    <ListBoxItem Name="FinancialListBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="36"
+                                Text="&#xE80F;" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontSize="36"
+                                Text="Financial" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Name="FoodListBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="36"
+                                Text="&#xE1CE;" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontSize="36"
+                                Text="Food" />
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame Name="MyFrame" />
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
 </Page>
