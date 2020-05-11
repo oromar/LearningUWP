@@ -51,14 +51,21 @@
                 FontSize="36"
                 RelativePanel.AlignRightWithPanel="True" />
         </RelativePanel>
-        <StackPanel Orientation="Horizontal">
+        <RelativePanel
+            Width="Auto"
+            Height="Auto"
+            VerticalAlignment="Top">
             <SplitView
                 Name="MenuSplitView"
                 Margin="0,0,0,0"
                 CompactPaneLength="56"
                 DisplayMode="CompactOverlay"
                 IsPaneOpen="False"
-                OpenPaneLength="210">
+                OpenPaneLength="210"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignTopWithPanel="True">
                 <SplitView.Pane>
                     <ListBox
                         Name="MenuListBox"
@@ -92,11 +99,9 @@
                     </ListBox>
                 </SplitView.Pane>
                 <SplitView.Content>
-                    <StackPanel Width="1310" Height="800">
-                        <Frame Name="MyFrame" />
-                    </StackPanel>
+                    <Frame Name="MyFrame" />
                 </SplitView.Content>
             </SplitView>
-        </StackPanel>
+        </RelativePanel>
     </StackPanel>
 </Page>

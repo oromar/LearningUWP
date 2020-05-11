@@ -65,6 +65,7 @@ namespace HamburguerHeavenChallenge
                 TitleTextBlock.Text = "Financial";
                 BackButton.Visibility =Visibility.Collapsed;
                 TitleTextBlock.Margin = new Thickness(60,0,0,0);
+                MenuListBox.SelectedValue = FinancialListBoxItem;
             }
         }
     }
