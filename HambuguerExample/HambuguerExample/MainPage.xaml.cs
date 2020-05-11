@@ -30,7 +30,6 @@ namespace HambuguerExample
         private void HamburguerMenuButton_Click(object sender, RoutedEventArgs e)
         {
             MenuSplitView.IsPaneOpen = !MenuSplitView.IsPaneOpen;
-
         }
 
         private void MenuIcons_SelectionChanged(object sender, SelectionChangedEventArgs e)
