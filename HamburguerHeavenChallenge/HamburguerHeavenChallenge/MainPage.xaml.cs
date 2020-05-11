@@ -39,16 +39,15 @@ namespace HamburguerHeavenChallenge
 
         private void MenuListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var listBox = sender as ListBox;
-            var selected = listBox.SelectedItem as ListBoxItem;
-            if (selected.Name == "FinancialListBoxItem")
+            if (FinancialListBoxItem.IsSelected)
             {
+
                 MyFrame.Navigate(typeof(Financial));
                 TitleTextBlock.Text = "Financial";
                 TitleTextBlock.Margin = new Thickness(60,0,0,0);
                 BackButton.Visibility = Visibility.Collapsed;
             }
-            else if (selected.Name == "FoodListBoxItem")
+            else if (FoodListBoxItem.IsSelected)
             {
                 MyFrame.Navigate(typeof(Food));
                 TitleTextBlock.Text = "Food";
