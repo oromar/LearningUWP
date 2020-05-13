@@ -61,7 +61,7 @@ namespace Exercise1
                     break;
                 case nameof(ImageButton4):
                     ImageLoader.Source = image4;
-                    break;
+                    break; 
             }
         }
 

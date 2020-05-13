@@ -145,9 +145,9 @@
     <value>Anterior</value>
   </data>
   <data name="SyncTextBlock.Text" xml:space="preserve">
-    <value>Atualizando</value>
+    <value>Sincronizando</value>
   </data>
   <data name="SyncToggleButton.Label" xml:space="preserve">
-    <value>Atualizar</value>
+    <value>Sincronizar</value>
   </data>
 </root>
