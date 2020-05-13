@@ -68,7 +68,8 @@
             <AppBarToggleButton
                 x:Name="SyncToggleButton"
                 x:Uid="SyncToggleButton"
-                Width="120"
+                MinWidth="80"
+                MaxWidth="120"
                 HorizontalAlignment="Right"
                 Icon="Sync"
                 Tapped="SyncToggleButton_Tapped" />
@@ -76,6 +77,7 @@
                 Name="LogoutButton"
                 x:Uid="LogoutButton"
                 HorizontalAlignment="Right"
+                Click="LogoutButton_Click"
                 Icon="People" />
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal">
@@ -133,15 +135,15 @@
                 Name="SyncPanel"
                 Margin="30,0,0,20"
                 Orientation="Horizontal"
-                RelativePanel.AlignBottomWithPanel="True">
+                RelativePanel.AlignBottomWithPanel="True"
+                Visibility="Collapsed">
 
                 <SymbolIcon
                     x:Name="SyncIcon"
                     Margin="0,0,10,0"
                     Foreground="Black"
                     RenderTransformOrigin="0.5, 0.5"
-                    Symbol="Sync"
-                    Visibility="Collapsed">
+                    Symbol="Sync">
                     <SymbolIcon.RenderTransform>
                         <RotateTransform Angle="0" />
                     </SymbolIcon.RenderTransform>
@@ -154,8 +156,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Foreground="Black"
-                    Opacity="0"
-                    Visibility="Collapsed" />
+                    Opacity="0" />
 
             </StackPanel>
         </RelativePanel>

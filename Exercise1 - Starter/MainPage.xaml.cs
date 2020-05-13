@@ -69,16 +69,19 @@ namespace Exercise1
         {
             if (SyncToggleButton.IsChecked.HasValue && SyncToggleButton.IsChecked.Value)
             {
-                SyncLabel.Visibility = Visibility.Visible;
-                SyncIcon.Visibility = Visibility.Visible;
+                SyncPanel.Visibility = Visibility.Visible;
                 StartSync.Begin();
             }
             else
             {
-                SyncLabel.Visibility = Visibility.Collapsed;
-                SyncIcon.Visibility = Visibility.Collapsed;
+                SyncPanel.Visibility = Visibility.Collapsed;
                 StartSync.Stop();
             }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Exit();
         }
     }
 }
