@@ -31,7 +31,11 @@ namespace StupendousStylesChallenge
         {
             var option = sender as MenuFlyoutItem;
             var result = string.Empty;
-           if (option.Text != "None")
+            if (option.Text == "None")
+            {
+                CoffeeResultText.Text = string.Empty;
+            }
+            else
             {
                 if (string.IsNullOrEmpty(CoffeeResultText.Text))
                 {
