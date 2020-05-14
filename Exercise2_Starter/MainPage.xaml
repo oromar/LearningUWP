@@ -22,23 +22,36 @@
         </TextBlock>
         <ProgressBar x:Name="Progress1" />
         <TextBlock
-            Margin="0,5,0,80"
+            Margin="0,5,0,60"
             HorizontalAlignment="Right"
             Text="3 Seconds" />
 
 
         <ProgressBar x:Name="Progress2" />
         <TextBlock
-            Margin="0,5,0,80"
+            Margin="0,5,0,60"
             HorizontalAlignment="Right"
             Text="5 Seconds" />
 
 
         <ProgressBar x:Name="Progress3" />
         <TextBlock
-            Margin="0,5,0,80"
+            Margin="0,5,0,60"
             HorizontalAlignment="Right"
             Text="8 Seconds" />
+
+        <ProgressBar x:Name="Progress4" />
+        <TextBlock
+            Margin="0,5,0,60"
+            HorizontalAlignment="Right"
+            Text="12 Seconds" />
+
+
+        <ProgressBar x:Name="Progress5" />
+        <TextBlock
+            Margin="0,5,0,60"
+            HorizontalAlignment="Right"
+            Text="17 Seconds" />
 
         <StackPanel
             Grid.Row="1"

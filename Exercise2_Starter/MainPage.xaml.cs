@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -39,7 +40,7 @@ namespace Exercise2
             EnableButton(CancelBtn);
             DisableButton(StartBtn);
             _cancellationTokenSource = new CancellationTokenSource();
-            await CreateTasks(_cancellationTokenSource.Token);
+            await Start(_cancellationTokenSource.Token);
         }
 
         private void OnCancel(object sender, RoutedEventArgs e)
@@ -53,6 +54,8 @@ namespace Exercise2
                 Progress1.Value = 0;
                 Progress2.Value = 0;
                 Progress3.Value = 0;
+                Progress4.Value = 0;
+                Progress5.Value = 0;
             }
         }
 
@@ -60,20 +63,28 @@ namespace Exercise2
         {
             button.IsEnabled = false;
         }
-        
+
         private void EnableButton(Button button)
         {
             button.IsEnabled = true;
         }
 
-        private async Task CreateTasks(CancellationToken token)
+        private async Task Start(CancellationToken token)
         {
-            DoAsync(3, Progress1, token);
-            DoAsync(5, Progress2, token);
-            DoAsync(8, Progress3, token);
+            var tasks = new List<Task>
+            {
+                DoAsync(seconds: 3, Progress1, token),
+                DoAsync(seconds: 5, Progress2, token),
+                DoAsync(seconds: 8, Progress3, token),
+                DoAsync(seconds: 12, Progress4, token),
+                DoAsync(seconds: 17, Progress5, token)
+            };
+            await Task.WhenAll(tasks);
+            EnableButton(StartBtn);
+            DisableButton(CancelBtn);
         }
 
-        private async void DoAsync(int seconds, ProgressBar progressBar, CancellationToken token)
+        private async Task DoAsync(int seconds, ProgressBar progressBar, CancellationToken token)
         {
             const int MILISECONDS_PER_SECOND = 1000;
             int delay = (seconds * MILISECONDS_PER_SECOND) / (int)progressBar.Maximum;
