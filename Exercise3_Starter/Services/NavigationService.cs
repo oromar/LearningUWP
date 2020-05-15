@@ -1,0 +1,130 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.Media.Capture.Frames;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using static Exercise3.Views.Page2;
+
+namespace Exercise3.Services
+{
+    public class NavigationService
+    {
+        private Frame frame;
+        private static NavigationService instance;
+        private int mainViewId = 0;
+        private CoreApplicationView mainView;
+        private IDictionary<int, CoreApplicationView> windows;
+
+        private NavigationService()
+        {
+            windows = new Dictionary<int, CoreApplicationView>();
+            SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService_BackRequested;
+        }
+
+        public static NavigationService Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new NavigationService();
+                return instance;
+            }
+        }
+
+        public async Task NavigateAsync<T>(object parameter = null) where T : Page
+        {
+            if (frame.CurrentSourcePageType != typeof(T))
+            {
+                await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    frame.Navigate(typeof(T), parameter);
+                });
+            }
+        }
+
+        public void SetFrame(Frame frame)
+        {
+            mainView = CoreApplication.GetCurrentView();
+            mainViewId = ApplicationView.GetForCurrentView().Id;
+
+            this.frame = frame;
+            this.frame.Navigated += Frame_Navigated;
+        }
+
+        public async Task GoBackAsync()
+        {
+            await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (frame.CanGoBack)
+                    frame.GoBack();
+            });
+        }
+
+        public async Task CloseWindowsAsync()
+        {
+            var list = windows.Values.ToList();
+            foreach (var window in list)
+            {
+                await window.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Window.Current.Close();
+                });
+            }
+            windows.Clear();
+        }
+
+        public async Task GoBackToMainViewAsync<T>() where T : Page
+        {
+            Window.Current.Close();
+
+            await mainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                frame.Navigate(typeof(T), State.SecondaryWindow);
+            });
+
+            await ApplicationViewSwitcher.TryShowAsStandaloneAsync(mainViewId);
+        }
+
+        public async Task CreateNewWindowAsync<T>() where T : Page
+        {
+            var newView = CoreApplication.CreateNewView();
+            int viewId = 0;
+            await newView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                var newFrame = new Frame();
+                newFrame.Navigate(typeof(T), State.MainWindow);
+                Window.Current.Content = newFrame;
+                Window.Current.Closed += Current_Closed; ;
+                Window.Current.Activate();
+
+                viewId = ApplicationView.GetForCurrentView().Id;
+                windows.Add(viewId, CoreApplication.GetCurrentView());
+            });
+            await ApplicationViewSwitcher.TryShowAsStandaloneAsync(viewId);
+        }
+
+        private void Current_Closed(object sender, CoreWindowEventArgs e)
+        {
+            var viewId = ApplicationView.GetForCurrentView().Id;
+            windows.Remove(viewId);
+        }
+
+        private void Frame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                frame.CanGoBack ? AppViewBackButtonVisibility.Visible :
+                                            AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private async void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            await GoBackAsync();
+        }
+    }
+}

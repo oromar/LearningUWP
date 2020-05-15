@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="Exercise3.Views.Page2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Exercise3.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid Background="#CCFF90">
+        <StackPanel
+            Margin="50"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Page 2" />
+            <Button
+                x:Name="OpenWindowBtn"
+                Margin="20"
+                HorizontalAlignment="Center"
+                Click="OpenWindowBtn_Click"
+                Content="Open in another window"
+                Visibility="Collapsed" />
+            <Button
+                x:Name="MainWindowBtn"
+                Margin="20"
+                HorizontalAlignment="Center"
+                Click="MainWindowBtn_Click"
+                Content="Move back to Main Window"
+                Visibility="Collapsed" />
+            <TextBlock
+                x:Name="BackToMainTxt"
+                Margin="20"
+                FontSize="30"
+                Text="Back from new Window"
+                Visibility="Collapsed" />
+        </StackPanel>
+    </Grid>
+</Page>
