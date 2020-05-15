@@ -40,10 +40,10 @@ namespace Exercise2
             EnableButton(CancelBtn);
             DisableButton(StartBtn);
             _cancellationTokenSource = new CancellationTokenSource();
-            await Start(_cancellationTokenSource.Token);
+            await DoStart(_cancellationTokenSource.Token);
         }
 
-        private void OnCancel(object sender, RoutedEventArgs e)
+        private void OnCancel(object sender, RoutedEventArgs e) 
         {
             if (_cancellationTokenSource != null)
             {
@@ -69,22 +69,22 @@ namespace Exercise2
             button.IsEnabled = true;
         }
 
-        private async Task Start(CancellationToken token)
+        private async Task DoStart(CancellationToken token)
         {
             var tasks = new List<Task>
             {
-                DoAsync(seconds: 3, Progress1, token),
-                DoAsync(seconds: 5, Progress2, token),
-                DoAsync(seconds: 8, Progress3, token),
-                DoAsync(seconds: 12, Progress4, token),
-                DoAsync(seconds: 17, Progress5, token)
+                FillProgressBar(seconds: 3, Progress1, token),
+                FillProgressBar(seconds: 5, Progress2, token),
+                FillProgressBar(seconds: 8, Progress3, token),
+                FillProgressBar(seconds: 12, Progress4, token),
+                FillProgressBar(seconds: 17, Progress5, token)
             };
             await Task.WhenAll(tasks);
             EnableButton(StartBtn);
             DisableButton(CancelBtn);
         }
 
-        private async Task DoAsync(int seconds, ProgressBar progressBar, CancellationToken token)
+        private async Task FillProgressBar(int seconds, ProgressBar progressBar, CancellationToken token)
         {
             const int MILISECONDS_PER_SECOND = 1000;
             int delay = (seconds * MILISECONDS_PER_SECOND) / (int)progressBar.Maximum;
