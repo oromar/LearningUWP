@@ -66,7 +66,7 @@ namespace Exercise3.Views
 
         private async void OpenWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            await NavigationService.Instance.CreateNewWindowAsync<Page2>();
+            await NavigationService.Instance.CreateNewWindowAsync<Page2>(State.MainWindow);
         }
 
         private void Current_Closed(object sender, Windows.UI.Core.CoreWindowEventArgs e)
@@ -76,7 +76,9 @@ namespace Exercise3.Views
 
         private async void MainWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            await NavigationService.Instance.GoBackToMainViewAsync<Page2>();
+            await NavigationService.Instance.NavigateAsync<Page2>(State.SecondaryWindow);
+            await NavigationService.Instance.GoBackToMainViewAsync();
+            Window.Current.Close();
         }
     }
 }

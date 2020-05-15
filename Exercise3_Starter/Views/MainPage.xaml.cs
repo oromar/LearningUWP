@@ -36,15 +36,13 @@ namespace Exercise3.Views
         private async void HandleButtonClick(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            object parameter = null;
             switch (button.Name)
             {
                 case nameof(Page1Button):
                     await NavigationService.Instance.NavigateAsync<Page1>();
                     break;
                 case nameof(Page2Button):
-                    parameter = State.Menu;
-                    await NavigationService.Instance.NavigateAsync<Page2>(parameter);
+                    await NavigationService.Instance.NavigateAsync<Page2>(State.Menu);
                     break;
                 case nameof(Page3Button):
                     await NavigationService.Instance.NavigateAsync<Page3>();

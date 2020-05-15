@@ -9,6 +9,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 using static Exercise3.Views.Page2;
 
 namespace Exercise3.Services
@@ -39,13 +40,13 @@ namespace Exercise3.Services
 
         public async Task NavigateAsync<T>(object parameter = null) where T : Page
         {
-            if (frame.CurrentSourcePageType != typeof(T))
+            await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                if (frame.CurrentSourcePageType != typeof(T) || parameter != null)
                 {
                     frame.Navigate(typeof(T), parameter);
-                });
-            }
+                }
+            });
         }
 
         public void SetFrame(Frame frame)
@@ -79,26 +80,20 @@ namespace Exercise3.Services
             windows.Clear();
         }
 
-        public async Task GoBackToMainViewAsync<T>() where T : Page
+        public async Task GoBackToMainViewAsync()
         {
-            Window.Current.Close();
-
-            await mainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                frame.Navigate(typeof(T), State.SecondaryWindow);
-            });
-
             await ApplicationViewSwitcher.TryShowAsStandaloneAsync(mainViewId);
         }
 
-        public async Task CreateNewWindowAsync<T>() where T : Page
+        public async Task CreateNewWindowAsync<T>(object parameter = null) where T : Page
         {
             var newView = CoreApplication.CreateNewView();
             int viewId = 0;
-            await newView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await newView.Dispatcher
+                .RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 var newFrame = new Frame();
-                newFrame.Navigate(typeof(T), State.MainWindow);
+                newFrame.Navigate(typeof(T), parameter);
                 Window.Current.Content = newFrame;
                 Window.Current.Closed += Current_Closed; ;
                 Window.Current.Activate();
@@ -115,10 +110,12 @@ namespace Exercise3.Services
             windows.Remove(viewId);
         }
 
-        private void Frame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                frame.CanGoBack ? AppViewBackButtonVisibility.Visible :
+            SystemNavigationManager
+                .GetForCurrentView()
+                .AppViewBackButtonVisibility = frame.CanGoBack ? 
+                                            AppViewBackButtonVisibility.Visible :
                                             AppViewBackButtonVisibility.Collapsed;
         }
 
