@@ -23,22 +23,22 @@
         <StackPanel Padding="10" Background="#CCCCCC">
             <Button
                 Name="Page1Button"
-                Click="HandleButtonClick"
+                Click="HandleButtonClickAsync"
                 Content="Page 1"
                 Style="{StaticResource BtnStyle}" />
             <Button
                 Name="Page2Button"
-                Click="HandleButtonClick"
+                Click="HandleButtonClickAsync"
                 Content="Page 2"
                 Style="{StaticResource BtnStyle}" />
             <Button
                 Name="Page3Button"
-                Click="HandleButtonClick"
+                Click="HandleButtonClickAsync"
                 Content="Page 3"
                 Style="{StaticResource BtnStyle}" />
             <Button
                 Name="CloseWindowsButton"
-                Click="HandleButtonClick"
+                Click="HandleButtonClickAsync"
                 Content="Close All Windows"
                 Style="{StaticResource BtnStyle}" />
         </StackPanel>

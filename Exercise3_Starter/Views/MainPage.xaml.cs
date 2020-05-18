@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using static Exercise3.Services.NavigationService;
 using static Exercise3.Views.Page2;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -30,10 +32,13 @@ namespace Exercise3.Views
         {
             this.InitializeComponent();
             NavigationService.Instance.SetFrame(NavigationFrame);
-            NavigationService.Instance.NavigateAsync<Page1>();
+            Task.Run(async () =>
+            {
+                await NavigationService.Instance.NavigateAsync<Page1>();
+            });
         }
 
-        private async void HandleButtonClick(object sender, RoutedEventArgs e)
+        private async void HandleButtonClickAsync(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             switch (button.Name)
@@ -42,7 +47,7 @@ namespace Exercise3.Views
                     await NavigationService.Instance.NavigateAsync<Page1>();
                     break;
                 case nameof(Page2Button):
-                    await NavigationService.Instance.NavigateAsync<Page2>(State.Menu);
+                    await NavigationService.Instance.NavigateAsync<Page2>(Caller.Menu);
                     break;
                 case nameof(Page3Button):
                     await NavigationService.Instance.NavigateAsync<Page3>();
@@ -52,11 +57,6 @@ namespace Exercise3.Views
                     return;
             }
 
-        }
-
-        private async void CurrentView_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            await NavigationService.Instance.GoBackAsync();
         }
     }
 }

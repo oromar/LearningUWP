@@ -20,12 +20,19 @@ namespace Exercise3.Services
         private static NavigationService instance;
         private int mainViewId = 0;
         private CoreApplicationView mainView;
-        private IDictionary<int, CoreApplicationView> windows;
+        private readonly IDictionary<int, CoreApplicationView> windows;
+
+        public enum Caller
+        {
+            Menu,
+            MainWindow,
+            SecondaryWindow
+        }
 
         private NavigationService()
         {
             windows = new Dictionary<int, CoreApplicationView>();
-            SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService_BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequest;
         }
 
         public static NavigationService Instance
@@ -55,7 +62,7 @@ namespace Exercise3.Services
             mainViewId = ApplicationView.GetForCurrentView().Id;
 
             this.frame = frame;
-            this.frame.Navigated += Frame_Navigated;
+            this.frame.Navigated += OnNavigate;
         }
 
         public async Task GoBackAsync()
@@ -95,7 +102,7 @@ namespace Exercise3.Services
                 var newFrame = new Frame();
                 newFrame.Navigate(typeof(T), parameter);
                 Window.Current.Content = newFrame;
-                Window.Current.Closed += Current_Closed; ;
+                Window.Current.Closed += OnCloseNewWindow; ;
                 Window.Current.Activate();
 
                 viewId = ApplicationView.GetForCurrentView().Id;
@@ -104,13 +111,13 @@ namespace Exercise3.Services
             await ApplicationViewSwitcher.TryShowAsStandaloneAsync(viewId);
         }
 
-        private void Current_Closed(object sender, CoreWindowEventArgs e)
+        private void OnCloseNewWindow(object sender, CoreWindowEventArgs e)
         {
             var viewId = ApplicationView.GetForCurrentView().Id;
             windows.Remove(viewId);
         }
 
-        private void Frame_Navigated(object sender, NavigationEventArgs e)
+        private void OnNavigate(object sender, NavigationEventArgs e)
         {
             SystemNavigationManager
                 .GetForCurrentView()
@@ -119,7 +126,7 @@ namespace Exercise3.Services
                                             AppViewBackButtonVisibility.Collapsed;
         }
 
-        private async void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
+        private async void OnBackRequest(object sender, BackRequestedEventArgs e)
         {
             await GoBackAsync();
         }

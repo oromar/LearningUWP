@@ -35,12 +35,12 @@ namespace Exercise2
             DisableButton(CancelBtn);
         }
 
-        private async void OnStart(object sender, RoutedEventArgs e)
+        private async void OnStartAsync(object sender, RoutedEventArgs e)
         {
             EnableButton(CancelBtn);
             DisableButton(StartBtn);
             _cancellationTokenSource = new CancellationTokenSource();
-            await DoStart(_cancellationTokenSource.Token);
+            await DoStartAsync(_cancellationTokenSource.Token);
         }
 
         private void OnCancel(object sender, RoutedEventArgs e) 
@@ -69,22 +69,23 @@ namespace Exercise2
             button.IsEnabled = true;
         }
 
-        private async Task DoStart(CancellationToken token)
+        private async Task DoStartAsync(CancellationToken token)
         {
             var tasks = new List<Task>
             {
-                FillProgressBar(seconds: 3, Progress1, token),
-                FillProgressBar(seconds: 5, Progress2, token),
-                FillProgressBar(seconds: 8, Progress3, token),
-                FillProgressBar(seconds: 12, Progress4, token),
-                FillProgressBar(seconds: 17, Progress5, token)
+                FillProgressBarAsync(seconds: 3, Progress1, token),
+                FillProgressBarAsync(seconds: 5, Progress2, token),
+                FillProgressBarAsync(seconds: 8, Progress3, token),
+                FillProgressBarAsync(seconds: 12, Progress4, token),
+                FillProgressBarAsync(seconds: 17, Progress5, token)
             };
             await Task.WhenAll(tasks);
             EnableButton(StartBtn);
             DisableButton(CancelBtn);
         }
 
-        private async Task FillProgressBar(int seconds, ProgressBar progressBar, CancellationToken token)
+        private async Task FillProgressBarAsync(int seconds, ProgressBar progressBar, 
+            CancellationToken token)
         {
             const int MILISECONDS_PER_SECOND = 1000;
             int delay = (seconds * MILISECONDS_PER_SECOND) / (int)progressBar.Maximum;

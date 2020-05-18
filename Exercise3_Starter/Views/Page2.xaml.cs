@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using static Exercise3.Services.NavigationService;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,16 +29,6 @@ namespace Exercise3.Views
     /// </summary>
     public sealed partial class Page2 : Page
     {
-        private static int _mainWindowViewId = 0;
-
-        public enum State
-        {
-            Menu,
-            MainWindow,
-            SecondaryWindow
-        }
-
-
         public Page2()
         {
             this.InitializeComponent();
@@ -47,17 +38,17 @@ namespace Exercise3.Views
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is State state)
+            if (e.Parameter is Caller caller)
             {
-                switch (state)
+                switch (caller)
                 {
-                    case State.Menu:
+                    case Caller.Menu:
                         OpenWindowBtn.Visibility = Visibility.Visible;
                         break;
-                    case State.MainWindow:
+                    case Caller.MainWindow:
                         MainWindowBtn.Visibility = Visibility.Visible;
                         break;
-                    case State.SecondaryWindow:
+                    case Caller.SecondaryWindow:
                         BackToMainTxt.Visibility = Visibility.Visible;
                         break;
                 }
@@ -66,17 +57,12 @@ namespace Exercise3.Views
 
         private async void OpenWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            await NavigationService.Instance.CreateNewWindowAsync<Page2>(State.MainWindow);
-        }
-
-        private void Current_Closed(object sender, Windows.UI.Core.CoreWindowEventArgs e)
-        {
-            var viewId = ApplicationView.GetForCurrentView().Id;
+            await NavigationService.Instance.CreateNewWindowAsync<Page2>(Caller.MainWindow);
         }
 
         private async void MainWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            await NavigationService.Instance.NavigateAsync<Page2>(State.SecondaryWindow);
+            await NavigationService.Instance.NavigateAsync<Page2>(Caller.SecondaryWindow);
             await NavigationService.Instance.GoBackToMainViewAsync();
             Window.Current.Close();
         }

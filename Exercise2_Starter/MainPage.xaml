@@ -60,7 +60,7 @@
             <Button
                 x:Name="StartBtn"
                 Margin="0,0,20,0"
-                Click="OnStart"
+                Click="OnStartAsync"
                 Content="Start" />
             <Button
                 x:Name="CancelBtn"
