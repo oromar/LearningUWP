@@ -47,12 +47,10 @@ namespace Exercise3.Services
 
         public async Task NavigateAsync<T>(object parameter = null) where T : Page
         {
-            await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await RunOnUIThreadAsync(() =>
             {
                 if (frame.CurrentSourcePageType != typeof(T) || parameter != null)
-                {
                     frame.Navigate(typeof(T), parameter);
-                }
             });
         }
 
@@ -67,7 +65,7 @@ namespace Exercise3.Services
 
         public async Task GoBackAsync()
         {
-            await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await RunOnUIThreadAsync(() =>
             {
                 if (frame.CanGoBack)
                     frame.GoBack();
@@ -121,7 +119,7 @@ namespace Exercise3.Services
         {
             SystemNavigationManager
                 .GetForCurrentView()
-                .AppViewBackButtonVisibility = frame.CanGoBack ? 
+                .AppViewBackButtonVisibility = frame.CanGoBack ?
                                             AppViewBackButtonVisibility.Visible :
                                             AppViewBackButtonVisibility.Collapsed;
         }
@@ -129,6 +127,14 @@ namespace Exercise3.Services
         private async void OnBackRequest(object sender, BackRequestedEventArgs e)
         {
             await GoBackAsync();
+        }
+
+        private async Task RunOnUIThreadAsync(Action action)
+        {
+            await mainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                action();
+            });
         }
     }
 }
