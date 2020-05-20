@@ -1,0 +1,110 @@
+﻿<Page
+    x:Class="Exercise4.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Exercise4"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x1="using:Exercise4.Models"
+    xmlns:x2="using:Exercise4.Converters"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <x2:EntryDateConverter x:Key="DateTimeConverter" />
+        <x2:EntryValueConverter x:Key="EntryValueConverter" />
+        <x2:ValueToForegroundConverter x:Key="ForegroundConverter" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <CommandBar DefaultLabelPosition="Right">
+            <AppBarButton
+                Name="DeleteButton"
+                Command="{x:Bind ViewModel.RemoveCommand}"
+                Icon="Delete"
+                Label="Delete" />
+        </CommandBar>
+
+        <Grid Grid.Row="1" Padding="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                <ListBox
+                    Name="EntriesListBox"
+                    ItemsSource="{x:Bind ViewModel.Entries}"
+                    SelectedItem="{x:Bind ViewModel.EntrySelected, Mode=TwoWay}"
+                    SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="x1:Entry">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="450" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Foreground="White"
+                                    Text="{x:Bind DateTime, Converter={StaticResource DateTimeConverter}}" />
+                                <TextBlock Grid.Column="2">
+                                    <Run Foreground="{x:Bind Value, Converter={StaticResource ForegroundConverter}}" Text="R$ " />
+                                    <Run Foreground="{x:Bind Value, Converter={StaticResource ForegroundConverter}}" Text="{x:Bind Value, Converter={StaticResource EntryValueConverter}}" />
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock HorizontalAlignment="Center">
+                    <Run
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Text="  BALANCE" />
+                    <LineBreak />
+                    <Run
+                        x:DefaultBindMode="OneWay"
+                        FontSize="80"
+                        Foreground="{x:Bind ViewModel.Total, Converter={StaticResource ForegroundConverter}}"
+                        Text="R$" />
+                    <Run
+                        x:DefaultBindMode="OneWay"
+                        FontSize="100"
+                        FontWeight="SemiBold"
+                        Foreground="{x:Bind ViewModel.Total, Converter={StaticResource ForegroundConverter}}"
+                        Text="{x:Bind ViewModel.Total, Converter={StaticResource EntryValueConverter}}" />
+                </TextBlock>
+
+                <TextBlock
+                    Margin="0,50,0,10"
+                    HorizontalAlignment="Center"
+                    Text="Add positive or negative numbers to you account." />
+                <Grid MaxWidth="300" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox
+                        x:Name="ValueTextBox"
+                        InputScope="Digits"
+                        Text="{x:Bind ViewModel.InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button
+                        Name="AddButton"
+                        Grid.Column="1"
+                        Command="{x:Bind ViewModel.AddCommand}"
+                        Content="ADD" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
