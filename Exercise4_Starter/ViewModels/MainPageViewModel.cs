@@ -55,7 +55,7 @@ namespace Exercise4.ViewModels
         public void Add()
         {
             Entries.Add(new Entry { Value = double.Parse(InputValue, CultureInfo.GetCultureInfo("pt-BR")), DateTime = DateTime.Now });
-            inputValue = null;
+            InputValue = null;
             NotifyPropertyChanged(nameof(InputValue));
             NotifyPropertyChanged(nameof(Total));
             AddCommand.RaiseCanExecuteChanged();

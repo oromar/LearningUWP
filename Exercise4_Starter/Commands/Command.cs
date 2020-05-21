@@ -30,7 +30,8 @@ namespace Exercise4.Commands
 
         public void Execute(object parameter)
         {
-            command?.Invoke();
+            if (CanExecute(null))
+                command?.Invoke();
         }
 
         public void RaiseCanExecuteChanged()
