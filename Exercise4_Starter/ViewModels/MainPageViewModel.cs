@@ -1,13 +1,9 @@
 ﻿using Exercise4.Commands;
 using Exercise4.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Exercise4.ViewModels
 {
@@ -52,16 +48,16 @@ namespace Exercise4.ViewModels
             }
         }
 
-        public void Add()
+        private void Add()
         {
-            Entries.Add(new Entry { Value = double.Parse(InputValue, CultureInfo.GetCultureInfo("pt-BR")), DateTime = DateTime.Now });
+            Entries.Add(new Entry { Value = double.Parse(InputValue), DateTime = DateTime.Now });
             InputValue = null;
             NotifyPropertyChanged(nameof(InputValue));
             NotifyPropertyChanged(nameof(Total));
             AddCommand.RaiseCanExecuteChanged();
         }
 
-        public void Remove()
+        private void Remove()
         {
             Entries.Remove(EntrySelected);
             EntrySelected = null;
