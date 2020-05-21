@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Exercise4.ViewModels
 {
-    public class MainPageViewModel : NotificationBase
+    public class MainPageViewModel : BaseViewModel
     {
         public ObservableCollection<Entry> Entries { get; set; }
         public Command AddCommand { get; set; }

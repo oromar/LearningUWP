@@ -9,7 +9,7 @@ using Windows.Services.Maps;
 
 namespace Exercise4.Models
 {
-    public class NotificationBase : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

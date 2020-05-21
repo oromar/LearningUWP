@@ -126,7 +126,7 @@
     <Compile Include="Converters\EntryValueConverter.cs" />
     <Compile Include="Converters\ValueToForegroundConverter.cs" />
     <Compile Include="Models\Entry.cs" />
-    <Compile Include="Models\NotificationBase.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
