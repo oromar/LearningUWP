@@ -96,6 +96,7 @@
                     <TextBox
                         x:Name="ValueTextBox"
                         InputScope="Digits"
+                        KeyUp="{x:Bind ViewModel.OnKeyUp}"
                         Text="{x:Bind ViewModel.InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Button

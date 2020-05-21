@@ -16,14 +16,6 @@ namespace Exercise4.Views
         public MainPage()
         {
             this.InitializeComponent();
-            
-            ValueTextBox.KeyUp += OnKeyUp;
-        }
-
-        private void OnKeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-                ViewModel.AddCommand.Execute(null);
         }
     }
 }
