@@ -11,12 +11,19 @@
     mc:Ignorable="d">
     <Grid>
 
-        <!--<controls:StaggedPanel StaggedHeight="60" MaxWidth="500" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <controls:StaggedPanel
+            MaxWidth="500"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            StaggedHeight="60">
             <Image Source="../Assets/Images/image1.jpg" Stretch="UniformToFill" />
-            <Image Source="../Assets/Images/image2.jpg" Stretch="UniformToFill" controls:StaggedPanel.Expanded="True" />
+            <Image
+                controls:StaggedPanel.Expanded="True"
+                Source="../Assets/Images/image2.jpg"
+                Stretch="UniformToFill" />
             <Image Source="../Assets/Images/image3.jpg" Stretch="UniformToFill" />
             <Image Source="../Assets/Images/image4.jpg" Stretch="UniformToFill" />
-        </controls:StaggedPanel>-->
+        </controls:StaggedPanel>
 
     </Grid>
 </UserControl>

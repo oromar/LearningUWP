@@ -130,6 +130,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IconButton.cs" />
+    <Compile Include="Controls\StaggedPanel.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Views\IconButtonView.xaml.cs">
       <DependentUpon>IconButtonView.xaml</DependentUpon>
