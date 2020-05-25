@@ -1,0 +1,84 @@
+﻿<Page
+    x:Class="Exercise6.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Exercise6"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Image MaxWidth="800" Source="Assets/Images/image1.jpg" />
+
+        <RelativePanel
+            Name="ButtonPanel"
+            Grid.Column="1"
+            VerticalAlignment="Center">
+            <Button
+                Name="Button1"
+                Margin="5"
+                Content="Option 1"
+                FontSize="28"
+                RelativePanel.AlignTopWithPanel="True" />
+            <Button
+                Name="Button2"
+                Margin="5"
+                Content="Option 2"
+                FontSize="28"
+                RelativePanel.Below="Button1" />
+            <Button
+                Name="Button3"
+                Margin="5"
+                Content="Option 3"
+                FontSize="28"
+                RelativePanel.Below="Button2" />
+            <Button
+                Name="Button4"
+                Margin="5"
+                Content="Option 4"
+                FontSize="28"
+                RelativePanel.Below="Button3" />
+        </RelativePanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ButtonPanel.(Grid.Row)" Value="1" />
+                        <Setter Target="ButtonPanel.(Grid.Column)" Value="0" />
+
+                        <Setter Target="ButtonPanel.HorizontalAlignment" Value="Center" />
+
+                        <Setter Target="Button2.(RelativePanel.RightOf)" Value="Button1" />
+                        <Setter Target="Button2.(RelativePanel.AlignTopWith)" Value="Button1" />
+
+                        <Setter Target="Button4.(RelativePanel.RightOf)" Value="Button3" />
+                        <Setter Target="Button4.(RelativePanel.AlignTopWith)" Value="Button3" />
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ButtonPanel.(Grid.Row)" Value="0" />
+                        <Setter Target="ButtonPanel.(Grid.Column)" Value="1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>
