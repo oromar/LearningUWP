@@ -122,73 +122,7 @@
                         SelectionMode="None">
                         <GridView.ItemTemplate>
                             <DataTemplate x:DataType="models:NewsItem">
-                                <Grid
-                                    Name="MainPanel"
-                                    Width="200"
-                                    Height="275"
-                                    Margin="10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Image Name="ImageView" Source="{x:Bind Image}" />
-                                    <RelativePanel
-                                        Name="CardStackPanel"
-                                        Grid.Row="1"
-                                        Margin="0"
-                                        Padding="0"
-                                        Background="White">
-                                        <TextBlock
-                                            Name="HeadLineTextBlock"
-                                            Margin="10,10,0,0"
-                                            FontSize="18"
-                                            Foreground="Black"
-                                            RelativePanel.AlignTopWithPanel="True"
-                                            Text="{x:Bind Headline}"
-                                            TextWrapping="Wrap" />
-                                        <TextBlock
-                                            Name="SubheadTextBlock"
-                                            Margin="10,0,0,0"
-                                            FontSize="14"
-                                            Foreground="Black"
-                                            RelativePanel.Below="HeadLineTextBlock"
-                                            Text="{x:Bind Subhead}"
-                                            TextWrapping="Wrap" />
-                                        <TextBlock
-                                            Margin="10"
-                                            VerticalAlignment="Bottom"
-                                            FontSize="10"
-                                            Foreground="Black"
-                                            RelativePanel.AlignBottomWithPanel="True"
-                                            Text="{x:Bind DateLine}"
-                                            TextWrapping="Wrap" />
-                                    </RelativePanel>
-
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup>
-                                            <VisualState x:Name="NarrowLayout">
-                                                <VisualState.StateTriggers>
-                                                    <AdaptiveTrigger MinWindowWidth="0" />
-                                                </VisualState.StateTriggers>
-                                                <VisualState.Setters>
-                                                    <Setter Target="MainPanel.Width" Value="200" />
-                                                    <Setter Target="MainPanel.Height" Value="275" />
-                                                    <Setter Target="HeadLineTextBlock.FontSize" Value="18" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                            <VisualState x:Name="WideLayout">
-                                                <VisualState.StateTriggers>
-                                                    <AdaptiveTrigger MinWindowWidth="600" />
-                                                </VisualState.StateTriggers>
-                                                <VisualState.Setters>
-                                                    <Setter Target="MainPanel.Width" Value="400" />
-                                                    <Setter Target="MainPanel.Height" Value="400" />
-                                                    <Setter Target="HeadLineTextBlock.FontSize" Value="26" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Grid>
+                                <local:NewsItemControl />
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

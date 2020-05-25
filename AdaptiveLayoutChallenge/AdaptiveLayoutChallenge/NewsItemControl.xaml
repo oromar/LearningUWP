@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="AdaptiveLayoutChallenge.NewsItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:AdaptiveLayoutChallenge"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <Grid
+        Name="MainPanel"
+        Width="200"
+        Height="275"
+        Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Image Name="ImageView" Source="{x:Bind NewsItem.Image}" />
+        <RelativePanel
+            Name="CardStackPanel"
+            Grid.Row="1"
+            Margin="0"
+            Padding="0"
+            Background="White">
+            <TextBlock
+                Name="HeadLineTextBlock"
+                Margin="10,10,0,0"
+                FontSize="18"
+                Foreground="Black"
+                RelativePanel.AlignTopWithPanel="True"
+                Text="{x:Bind NewsItem.Headline}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Name="SubheadTextBlock"
+                Margin="10,0,0,0"
+                FontSize="14"
+                Foreground="Black"
+                RelativePanel.Below="HeadLineTextBlock"
+                Text="{x:Bind NewsItem.Subhead}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Margin="10"
+                VerticalAlignment="Bottom"
+                FontSize="10"
+                Foreground="Black"
+                RelativePanel.AlignBottomWithPanel="True"
+                Text="{x:Bind NewsItem.DateLine}"
+                TextWrapping="Wrap" />
+        </RelativePanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainPanel.(Width)" Value="200" />
+                        <Setter Target="MainPanel.(Height)" Value="275" />
+                        <Setter Target="HeadLineTextBlock.FontSize" Value="18" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainPanel.(Width)" Value="400" />
+                        <Setter Target="MainPanel.(Height)" Value="400" />
+                        <Setter Target="HeadLineTextBlock.FontSize" Value="26" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>
