@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="Exercise7.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Exercise7"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel
+            MaxWidth="800"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <Button
+                x:Name="SyncBtn"
+                Margin="0,0,0,40"
+                HorizontalAlignment="Center"
+                Click="OnStartSync"
+                Content="Start Sync" />
+            <ProgressBar x:Name="SyncProgress" />
+        </StackPanel>
+
+    </Grid>
+</Page>

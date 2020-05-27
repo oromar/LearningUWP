@@ -7,7 +7,10 @@
         public string AudioFile { get; set; }
         public string ImageFile { get; set; }
 
+        public Sound()
+        {
 
+        }
         public Sound(string name, SoundCategory category)
         {
             Name = name;
@@ -22,6 +25,7 @@
         Animals,
         Cartoons,
         Taunts,
-        Warnings
+        Warnings,
+        Custom
     }
 }

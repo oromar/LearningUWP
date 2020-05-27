@@ -6,9 +6,8 @@ namespace UWPSoundBoard.Services
 {
     public static class SoundService
     {
-        public static List<Sound> GetAllSounds()
-        {
-            return new List<Sound>
+        private static readonly List<Sound> sounds =
+            new List<Sound>
             {
                 new Sound("Cat", SoundCategory.Animals),
                 new Sound("Cow", SoundCategory.Animals),
@@ -22,16 +21,24 @@ namespace UWPSoundBoard.Services
                 new Sound("Ship", SoundCategory.Warnings),
                 new Sound("Siren", SoundCategory.Warnings)
             };
+        public static List<Sound> GetAllSounds()
+        {
+            return sounds;
+        }
+
+        public static void AddSound(Sound sound)
+        {
+            sounds.Add(sound);
         }
 
         public static List<Sound> GetSounds(SoundCategory category)
         {
-            return GetAllSounds().Where(a => a.Category == category).ToList();
+            return sounds.Where(a => a.Category == category).ToList();
         }
 
         public static List<Sound> GetSounds(string name)
         {
-            return GetAllSounds().Where(a => a.Name.ToLower().Contains(name.ToLower())).ToList();
+            return sounds.Where(a => a.Name.ToLower().Contains(name.ToLower())).ToList();
         }
     }
 }
