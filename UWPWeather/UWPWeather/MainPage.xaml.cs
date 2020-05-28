@@ -22,8 +22,8 @@ namespace UWPWeather
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var coordinate = await LocationService.Instance.GetCoordinateAsync();
-            var weather = await WeatherService.Instance.GetWeatherAsync(coordinate);
+            var geoPosition = await LocationService.Instance.GetCurrentGeoPositionAsync();
+            var weather = await WeatherService.Instance.GetWeatherAsync(geoPosition);
 
             ImageView.UriSource = new Uri(weather.Icon);
             MainTextBlock.Text = weather.Main;
@@ -32,7 +32,7 @@ namespace UWPWeather
             TemperatureTextBlock.Text = weather.Temperature.ToString("0");
             MainGrid.Visibility = Visibility.Visible;
 
-            var uri = new Uri($@"http://api.openweathermap.org/data/2.5/weather?lat={coordinate.Point.Position.Latitude}&lon={coordinate.Point.Position.Longitude}&appid={WeatherService.API_KEY}");
+            var uri = new Uri($@"http://api.openweathermap.org/data/2.5/weather?lat={geoPosition.Latitude}&lon={geoPosition.Longitude}&appid={WeatherService.API_KEY}");
             var interval = PeriodicUpdateRecurrence.HalfHour;
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.StartPeriodicUpdate(uri, interval);

@@ -13,17 +13,16 @@ namespace UWPWeather.Services
 
         }
 
-        public async Task<Geocoordinate> GetCoordinateAsync()
+        public async Task<BasicGeoposition> GetCurrentGeoPositionAsync()
         {
             var status = await Geolocator.RequestAccessAsync();
 
             if (status == GeolocationAccessStatus.Allowed)
             {
                 var geoPosition = await new Geolocator().GetGeopositionAsync();
-                var coordinate = geoPosition.Coordinate;
-                return coordinate;
+                return geoPosition?.Coordinate?.Point?.Position ?? default;
             }
-            return null;
+            return default;
         }
     }
 }
