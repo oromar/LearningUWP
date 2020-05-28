@@ -1,5 +1,6 @@
 ﻿using System;
 using UWPWeather.Services;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -21,13 +22,20 @@ namespace UWPWeather
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var weather = await WeatherService.Instance.GetWeatherAsync();
+            var coordinate = await LocationService.Instance.GetCoordinateAsync();
+            var weather = await WeatherService.Instance.GetWeatherAsync(coordinate);
+
             ImageView.UriSource = new Uri(weather.Icon);
             MainTextBlock.Text = weather.Main;
             DescriptionTextBlock.Text = weather.Description;
             CityTextBlock.Text = weather.City;
             TemperatureTextBlock.Text = weather.Temperature.ToString("0");
             MainGrid.Visibility = Visibility.Visible;
-        }
+
+            var uri = new Uri($@"http://api.openweathermap.org/data/2.5/weather?lat={coordinate.Point.Position.Latitude}&lon={coordinate.Point.Position.Longitude}&appid={WeatherService.API_KEY}");
+            var interval = PeriodicUpdateRecurrence.HalfHour;
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.StartPeriodicUpdate(uri, interval);
+        }   
     }
 }

@@ -8,17 +8,15 @@ namespace UWPWeather.Services
 {
     public class WeatherService
     {
-        private const string API_KEY = "API_KEY";
+        public const string API_KEY = "API_KEY";
         public static WeatherService Instance { get; } = new WeatherService();
 
         private WeatherService()
         {
         }
 
-        public async Task<Weather> GetWeatherAsync()
+        public async Task<Weather> GetWeatherAsync(Geocoordinate coordinate)
         {
-            var coordinate = await LocationService.Instance.GetCoordinateAsync();
-
             var client = new HttpClient();
             var response =
                 await client.GetAsync(
