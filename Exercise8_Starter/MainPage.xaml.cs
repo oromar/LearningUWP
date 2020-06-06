@@ -1,23 +1,11 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Services.Maps;
 using Windows.Storage;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -81,12 +69,14 @@ namespace Exercise8
                 var items = await e.DataView.GetStorageItemsAsync();
 
                 var count = items.Count;
-
+                var localFolder = ApplicationData.Current.LocalFolder;
+                
                 if (items.Any())
                 {
                     foreach (var item in items)
                     {
-                        Files.Add(item as StorageFile);
+                        var newFile = await (item as StorageFile).CopyAsync(localFolder, item.Name, NameCollisionOption.GenerateUniqueName);
+                        Files.Add(newFile);
                     }
                 }
 

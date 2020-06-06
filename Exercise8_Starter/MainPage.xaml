@@ -56,7 +56,15 @@
             ItemsSource="{x:Bind Files}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="s:StorageFile">
-                    <TextBlock Text="{x:Bind Name}" />
+                    <StackPanel>
+                        <TextBlock Text="{x:Bind Name}" />
+                        <TextBlock Text="{x:Bind Path}" />
+                        <Image
+                            Width="100"
+                            Height="100"
+                            Source="{x:Bind Path}"
+                            Stretch="UniformToFill" />
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
