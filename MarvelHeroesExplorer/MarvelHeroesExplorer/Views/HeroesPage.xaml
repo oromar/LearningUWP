@@ -30,17 +30,22 @@
                 VerticalAlignment="Top"
                 Source="/Assets/marvel-logo.png" />
 
+            <ProgressRing
+                Grid.Row="1"
+                Margin="10"
+                IsActive="{x:Bind ViewModel.InitLoading, Mode=OneWay}" />
+
             <AutoSuggestBox
                 Grid.Row="1"
                 Margin="10"
                 Padding="20"
                 FontFamily="Segoe UI"
                 FontSize="16"
-                IsEnabled="{x:Bind ViewModel.HeroesLoaded, Mode=OneWay}"
                 PlaceholderText="Search a Hero"
                 QueryIcon="Find"
                 QuerySubmitted="{x:Bind ViewModel.OnSearchHero}"
-                TextChanged="{x:Bind ViewModel.OnSearchTextChanged}" />
+                TextChanged="{x:Bind ViewModel.OnSearchTextChanged}"
+                Visibility="{x:Bind ViewModel.InitFinished, Mode=OneWay}" />
 
             <ListView
                 Grid.Row="2"

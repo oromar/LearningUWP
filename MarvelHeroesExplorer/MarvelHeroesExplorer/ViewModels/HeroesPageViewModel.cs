@@ -5,7 +5,6 @@ using Prism.Windows.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
@@ -13,7 +12,6 @@ namespace MarvelHeroesExplorer.ViewModels
 {
     public class HeroesPageViewModel : ViewModelBase
     {
-        private bool loadingHeroes = false;
         private readonly IMarvelApiService service;
         private readonly ICacheService cacheService;
 
@@ -21,10 +19,10 @@ namespace MarvelHeroesExplorer.ViewModels
         {
             this.service = marvelApiService;
             this.cacheService = cacheService;
-            LoadHeroes();
+            Init();
         }
 
-        private IList<MarvelCharacter> allHeroes = new List<MarvelCharacter>();
+        private readonly IList<MarvelCharacter> allHeroes = new List<MarvelCharacter>();
 
         private ObservableCollection<MarvelCharacter> _heroes = new ObservableCollection<MarvelCharacter>();
         public ObservableCollection<MarvelCharacter> Heroes
@@ -76,6 +74,25 @@ namespace MarvelHeroesExplorer.ViewModels
             }
         }
 
+        private bool _initFinished = false;
+        public bool InitFinished
+        {
+            get { return _initFinished; }
+            set { SetProperty(ref _initFinished, value); }
+        }
+
+        private bool _initLoading;
+        public bool InitLoading
+        {
+            get { return _initLoading; }
+            set 
+            { 
+                SetProperty(ref _initLoading, value);
+                InitFinished = !value;
+            }
+        }
+
+
         private bool _comicsLoaded;
         public bool ComicsLoaded
         {
@@ -122,11 +139,9 @@ namespace MarvelHeroesExplorer.ViewModels
             allHeroes.ForEach(a => Heroes.Add(a));
         }
 
-        private async Task LoadHeroes()
+        private async Task Init()
         {
-            if (loadingHeroes) return;
-
-            loadingHeroes = LoadingHeroes = true;
+            LoadingHeroes = InitLoading = true;
 
             var filter = new ApiFilters();
 
@@ -142,16 +157,16 @@ namespace MarvelHeroesExplorer.ViewModels
                 filter.Offset += 50;
                 data = await GetCharactersDataAsync(filter);
             }
-            loadingHeroes = false;
+            InitLoading = false;
         }
 
         private async Task<IList<MarvelComic>> GetCharacterComicsDataAysnc(int id)
         {
             IList<MarvelComic> data;
 
-            var cacheKey = $"Hero_Comics_{id}";
+            var key = $"Hero_Comics_{id}";
 
-            var cache = await cacheService.GetCacheAsync<List<MarvelComic>>(cacheKey);
+            var cache = await cacheService.GetCacheAsync<List<MarvelComic>>(key);
 
             if (cache != null)
             {
@@ -160,7 +175,7 @@ namespace MarvelHeroesExplorer.ViewModels
             else
             {
                 data = await service.GetCharacterComicsAsync(id);
-                cacheService.WriteCache<IList<MarvelComic>>(cacheKey, data);
+                cacheService.WriteCache<IList<MarvelComic>>(key, data);
             }
 
             return data;
@@ -170,8 +185,8 @@ namespace MarvelHeroesExplorer.ViewModels
         {
             IList<MarvelCharacter> data;
 
-            var cacheKey = $"Heroes_{filter.Offset}_{filter.Limit + filter.Offset}";
-            var cache = await cacheService.GetCacheAsync<List<MarvelCharacter>>(cacheKey);
+            var key = $"Heroes_{filter.Offset}_{filter.Limit + filter.Offset}";
+            var cache = await cacheService.GetCacheAsync<List<MarvelCharacter>>(key);
             if (cache != null)
             {
                 data = cache;
@@ -179,7 +194,7 @@ namespace MarvelHeroesExplorer.ViewModels
             else
             {
                 data = await service.GetCharacterListAsync(filter);
-                cacheService.WriteCache<IList<MarvelCharacter>>(cacheKey, data);
+                cacheService.WriteCache<IList<MarvelCharacter>>(key, data);
             }
             return data;
         }

@@ -2,5 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
+    <Source>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</Source>
+    <SmallTileSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</SmallTileSource>
+    <MediumTileSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</MediumTileSource>
+    <WideTileSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</WideTileSource>
+    <LargeTileSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</LargeTileSource>
+    <AppIconSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</AppIconSource>
+    <SplashScreenSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</SplashScreenSource>
+    <PackageLogoSource>F:\Projects\LearningUWP\MarvelHeroesExplorer\MarvelHeroesExplorer\Assets\342019.jpg</PackageLogoSource>
   </PropertyGroup>
 </Project>
