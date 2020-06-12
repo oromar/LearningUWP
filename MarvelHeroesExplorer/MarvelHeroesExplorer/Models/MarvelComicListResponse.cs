@@ -2,26 +2,26 @@
 {
     public class MarvelComicListResponse
     {
-        public ComicData data { get; set; }
+        public ComicData Data { get; set; }
     }
 
     public class ComicData
     {
-        public ComicResult[] results { get; set; }
+        public ComicResult[] Results { get; set; }
     }
 
     public class ComicResult
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public Date[] dates { get; set; }
-        public Thumbnail thumbnail { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public ComicDate[] Dates { get; set; }
+        public Thumbnail Thumbnail { get; set; }
     }
    
-    public class Date
+    public class ComicDate
     {
-        public string type { get; set; }
-        public string date { get; set; }
+        public string Type { get; set; }
+        public string Date { get; set; }
     }
 }

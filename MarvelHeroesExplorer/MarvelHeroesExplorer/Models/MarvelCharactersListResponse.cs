@@ -3,26 +3,26 @@
 
     public class MarvelCharactersListResponse
     {
-        public Data data { get; set; }
+        public Data Data { get; set; }
     }
 
     public class Data
     {
-        public Result[] results { get; set; }
+        public Result[] Results { get; set; }
     }
 
     public class Result
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public Thumbnail thumbnail { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Thumbnail Thumbnail { get; set; }
     }
 
     public class Thumbnail
     {
-        public string path { get; set; }
-        public string extension { get; set; }
+        public string Path { get; set; }
+        public string Extension { get; set; }
     }
 
 

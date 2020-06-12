@@ -51,12 +51,12 @@ namespace MarvelHeroesExplorer.Services
 
             var json = await SendHttpRequestAsync<MarvelCharactersListResponse>(url);
 
-            var result = json.data.results.Select(hero => new MarvelCharacter
+            var result = json.Data.Results.Select(hero => new MarvelCharacter
             {
-                Id = hero.id,
-                Name = hero.name,
-                ImageURL = $"{hero.thumbnail.path}.{hero.thumbnail.extension}",
-                Description = hero.description
+                Id = hero.Id,
+                Name = hero.Name,
+                ImageURL = $"{hero.Thumbnail.Path}.{hero.Thumbnail.Extension}",
+                Description = hero.Description
             })
             .ToList();
 
@@ -71,13 +71,13 @@ namespace MarvelHeroesExplorer.Services
 
             var regex = new System.Text.RegularExpressions.Regex("</?\\w+>");
 
-            var result = json.data.results.Where(comic => !string.IsNullOrWhiteSpace(comic.thumbnail.path)).Select(comic => new MarvelComic
+            var result = json.Data.Results.Where(comic => !string.IsNullOrWhiteSpace(comic.Thumbnail.Path)).Select(comic => new MarvelComic
             {
-                Id = comic.id,
-                Title = regex.Replace(comic?.title ?? string.Empty, string.Empty)?.Trim(),
-                Description = regex.Replace(comic?.description ?? string.Empty, string.Empty)?.Trim(),
-                ImageURL = $"{comic.thumbnail.path}.{comic.thumbnail.extension}",
-                PublishedAt = DateTime.Parse(comic.dates.FirstOrDefault(a => a.type == "onsaleDate")?.date, null, System.Globalization.DateTimeStyles.RoundtripKind)
+                Id = comic.Id,
+                Title = regex.Replace(comic?.Title ?? string.Empty, string.Empty)?.Trim(),
+                Description = regex.Replace(comic?.Description ?? string.Empty, string.Empty)?.Trim(),
+                ImageURL = $"{comic.Thumbnail.Path}.{comic.Thumbnail.Extension}",
+                PublishedAt = DateTime.Parse(comic.Dates.FirstOrDefault(a => a.Type == "onsaleDate")?.Date, null, System.Globalization.DateTimeStyles.RoundtripKind)
             }).ToList();
 
             return result;

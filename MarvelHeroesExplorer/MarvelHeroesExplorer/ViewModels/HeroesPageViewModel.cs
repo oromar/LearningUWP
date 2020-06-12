@@ -175,7 +175,7 @@ namespace MarvelHeroesExplorer.ViewModels
             else
             {
                 data = await service.GetCharacterComicsAsync(id);
-                cacheService.WriteCache<IList<MarvelComic>>(key, data);
+                cacheService.WriteCacheAsync<IList<MarvelComic>>(key, data);
             }
 
             return data;
@@ -194,7 +194,7 @@ namespace MarvelHeroesExplorer.ViewModels
             else
             {
                 data = await service.GetCharacterListAsync(filter);
-                cacheService.WriteCache<IList<MarvelCharacter>>(key, data);
+                cacheService.WriteCacheAsync<IList<MarvelCharacter>>(key, data);
             }
             return data;
         }

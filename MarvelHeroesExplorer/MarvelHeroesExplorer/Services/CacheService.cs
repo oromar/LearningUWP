@@ -29,9 +29,9 @@ namespace MarvelHeroesExplorer.Services
             return default(T);
         }
 
-        public void WriteCache<T>(string key, T data)
+        public async void WriteCacheAsync<T>(string key, T data)
         {
-            File.WriteAllText(Path.Combine(applicationFolder.Path, $"{key}.json"), JsonConvert.SerializeObject(data));
+            await File.WriteAllTextAsync(Path.Combine(applicationFolder.Path, $"{key}.json"), JsonConvert.SerializeObject(data));
         }
     }
 }
