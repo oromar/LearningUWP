@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\StringConverter.cs" />
     <Compile Include="Models\ApiFilters.cs" />
     <Compile Include="Models\MarvelCharacter.cs" />
     <Compile Include="Models\MarvelCharactersListResponse.cs" />

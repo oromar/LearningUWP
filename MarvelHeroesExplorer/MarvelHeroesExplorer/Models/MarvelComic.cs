@@ -7,18 +7,7 @@ namespace MarvelHeroesExplorer.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-
-        private DateTime publishedAt;
-        public DateTime PublishedAt
-        {
-            get { return publishedAt; }
-            set
-            {
-                publishedAt = value;
-                FormattedPublishedAt = value.ToString("MM/yyyy");
-            }
-        }
+        public DateTime PublishedAt { get; set; }
         public string ImageURL { get; set; }
-        public string FormattedPublishedAt { get; set; }
     }
 }

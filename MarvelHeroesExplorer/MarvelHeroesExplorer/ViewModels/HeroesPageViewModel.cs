@@ -12,12 +12,12 @@ namespace MarvelHeroesExplorer.ViewModels
 {
     public class HeroesPageViewModel : ViewModelBase
     {
-        private readonly IMarvelApiService service;
+        private readonly IMarvelApiService marvelService;
         private readonly ICacheService cacheService;
 
         public HeroesPageViewModel(IMarvelApiService marvelApiService, ICacheService cacheService)
         {
-            this.service = marvelApiService;
+            this.marvelService = marvelApiService;
             this.cacheService = cacheService;
             Init();
         }
@@ -174,7 +174,7 @@ namespace MarvelHeroesExplorer.ViewModels
             }
             else
             {
-                data = await service.GetCharacterComicsAsync(id);
+                data = await marvelService.GetCharacterComicsAsync(id);
                 cacheService.WriteCacheAsync<IList<MarvelComic>>(key, data);
             }
 
@@ -193,7 +193,7 @@ namespace MarvelHeroesExplorer.ViewModels
             }
             else
             {
-                data = await service.GetCharacterListAsync(filter);
+                data = await marvelService.GetCharacterListAsync(filter);
                 cacheService.WriteCacheAsync<IList<MarvelCharacter>>(key, data);
             }
             return data;

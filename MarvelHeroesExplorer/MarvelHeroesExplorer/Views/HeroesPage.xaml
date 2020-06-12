@@ -2,6 +2,7 @@
     x:Class="MarvelHeroesExplorer.Views.HeroesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:MarvelHeroesExplorer.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:MarvelHeroesExplorer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,6 +11,9 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="Black"
     mc:Ignorable="d">
+    <Page.Resources>
+        <converters:StringConverter x:Key="StringConverter" />
+    </Page.Resources>
     <Grid>
         <ProgressRing Width="100" IsActive="{x:Bind ViewModel.LoadingHeroes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Grid Visibility="{x:Bind ViewModel.HeroesLoaded, Mode=OneWay}">
@@ -183,7 +187,7 @@
                                         <Run FontSize="16" Text="{x:Bind Description, Mode=OneWay}" />
                                         <LineBreak />
                                         <Run FontSize="12" Text="Published At: " />
-                                        <Run FontSize="12" Text="{x:Bind FormattedPublishedAt, Mode=OneWay}" />
+                                        <Run FontSize="12" Text="{x:Bind PublishedAt, Mode=OneWay, Converter={StaticResource StringConverter}, ConverterParameter='MM/yyyy'}" />
                                     </TextBlock>
                                 </Grid>
                             </DataTemplate>
