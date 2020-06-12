@@ -12,8 +12,8 @@ namespace MarvelHeroesExplorer.Services
 {
     public class MarvelApiService : IMarvelApiService
     {
-        private const string PUBLIC_KEY = "";
-        private const string PRIVATE_KEY = "";
+        private const string PUBLIC_KEY = "fe6a5580818fe60fd83c89dc8d2c51a2";
+        private const string PRIVATE_KEY = "92d36187336c88af177feda0fcdfc63d956d278d";
         private const string BASE_URL = "http://gateway.marvel.com:80/v1/public/";
 
         private readonly HttpClient httpClient = new HttpClient();
@@ -37,18 +37,16 @@ namespace MarvelHeroesExplorer.Services
             return MD5(toBeHashed);
         }
 
-        private static string MD5(string str)
+        private static string MD5(string value)
         {
             var alg = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
-            var buffer = CryptographicBuffer.ConvertStringToBinary(str, BinaryStringEncoding.Utf8);
+            var buffer = CryptographicBuffer.ConvertStringToBinary(value, BinaryStringEncoding.Utf8);
             var hashed = alg.HashData(buffer);
             return CryptographicBuffer.EncodeToHexString(hashed);
         }
 
         public async Task<IList<MarvelCharacter>> GetCharacterListAsync(ApiFilters filter)
         {
-            var timestamp = DateTime.Now.Ticks;
-
             var url = $"{BASE_URL}/characters?{AuthorizationData}&{filter}";
 
             var json = await SendHttpRequestAsync<MarvelCharactersListResponse>(url);
@@ -67,7 +65,6 @@ namespace MarvelHeroesExplorer.Services
 
         public async Task<List<MarvelComic>> GetCharacterComicsAsync(int id)
         {
-            var timestamp = DateTime.Now.Ticks;
             var url = $"{BASE_URL}/characters/{id}/comics?{AuthorizationData}";
 
             var json = await SendHttpRequestAsync<MarvelComicListResponse>(url);
